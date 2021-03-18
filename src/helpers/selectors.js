@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react'
+
 export function getAppointmentsForDay(state, day) {
   const [filteredDay] = state.days.filter(days => days.name === day);
 
@@ -7,4 +9,23 @@ export function getAppointmentsForDay(state, day) {
   const appointmentInfo = appointments.map(element => state.appointments[element])
 
   return appointmentInfo;
+};
+
+
+export function getInterview(state, interview) {
+
+  console.log('INTERVIEW', interview);
+  console.log('STATE', state.interviewers)
+
+
+  if (!interview) return null;
+  const interviewer = state.interviewers[interview.interviewer]
+
+  const interviewInfo = {
+    student: interview.student,
+    interviewer: interviewer
+  }
+  console.log('InterviewInfo shows', interviewInfo)
+
+  return interviewInfo;
 };
