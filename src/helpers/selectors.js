@@ -13,19 +13,18 @@ export function getAppointmentsForDay(state, day) {
 
 
 export function getInterview(state, interview) {
-
-  console.log('INTERVIEW', interview);
-  console.log('STATE', state.interviewers)
-
+  // console.log('Interview passes in':, interview);
+  // console.log('State passes in:', state.interviewers)
 
   if (!interview) return null;
+    
   const interviewer = state.interviewers[interview.interviewer]
 
   const interviewInfo = {
     student: interview.student,
     interviewer: interviewer
   }
-  console.log('InterviewInfo shows', interviewInfo)
+  console.log('interviewerInfo returns:', interviewInfo);
 
   return interviewInfo;
 };
