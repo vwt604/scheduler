@@ -1,41 +1,11 @@
-/*
-
-Application.js  is the parent component so props won't be passed here usually. 
-
-State: someData, setSomeData
-        userDatam setUserData
-
-
-When we call the setDay action, it changes the day state. 
-When we change the state, the Application renders and passes the new day to the DayList. 
-The DayList renders and passes props to the DayListItem children causing the updates to the selected visual state.
-
-*/
-
-import React, { useState } from "react"; //useState hook
+import React, { useEffect, useState } from "react";
+import axios from 'axios';
 import "components/Application.scss";
 import DayList from 'components/DayList.js';
 import Appointment from "components/Appointment/index";
 
 
 // Test data 
-const days = [
-  {
-    id: 1,
-    name: "Monday",
-    spots: 2,
-  },
-  {
-    id: 2,
-    name: "Tuesday",
-    spots: 5,
-  },
-  {
-    id: 3,
-    name: "Wednesday",
-    spots: 0,
-  },
-];
 
 const appointments = [
   {
@@ -93,21 +63,24 @@ const appointments = [
 ];
 
 
-
 export default function Application(props) {
+  const [days, setDays] = useState([]);
+  const [day, setDay] = useState('Monday');
 
-const [day, setDay] = useState("Monday");
+  useEffect(() => {
+    axios.get('http://localhost:8001/api/days')
+      .then(res => {setDays([...res.data])})
+  }, []); 
 
-const appointmentsArr = appointments.map(appointment => {
-  return (
-    <Appointment key={appointment.id} {...appointment} />
-  );
-});
 
-appointmentsArr.push(<Appointment key="last" time="5pm" />)
+  const appointmentsArr = appointments.map(appointment => {
+    return (
+      <Appointment key={appointment.id} {...appointment} />
+    );
+  });
 
-  return (
-    <main className="layout">
+    return (
+      <main className="layout">
       <section className="sidebar">
         <img
           className="sidebar--centered"
@@ -116,7 +89,11 @@ appointmentsArr.push(<Appointment key="last" time="5pm" />)
         />
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
-          <DayList days={days} day={day} setDay={setDay} />
+          <DayList 
+            days={days} 
+            day={day} 
+            setDay={setDay} 
+          />
         </nav>
         <img
           className="sidebar__lhl sidebar--centered"
@@ -126,30 +103,8 @@ appointmentsArr.push(<Appointment key="last" time="5pm" />)
       </section>
       <section className="schedule">
         {appointmentsArr}
+        <Appointment key="last" time="5pm" />
       </section>
     </main>
   );
 }
-
-
-// const interviewerListItems = interviewers.map(interviewer => {
-//   return (
-//     <InterviewerListItem
-//       key={interviewer.id}
-//       name={interviewer.name}
-//       id={interviewer.id}
-//       avatar={interviewer.avatar}
-//       selected={interviewer.id === currentInterviewer}
-//       setInterviewer={setInterviewer}
-//     />
-//   );
-// });
-
-// return (
-//   <section className="interviewers">
-//     <h4 className="interviewers__header text--light">Interviewer</h4>
-//     <ul className="interviewers__list">
-//       {interviewerListItems}
-//     </ul>
-//   </section>
-// )
