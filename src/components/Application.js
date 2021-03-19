@@ -1,9 +1,3 @@
-/*
-// Test not passing 
-// getInterviewersForDay - is it supposed to display interviewers??
-// Prettier 
-*/
-
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import "components/Application.scss";
@@ -21,10 +15,36 @@ export default function Application(props) {
     interviewers: {},
   });
 
+  // Updates the state with the new day
+  const setDay = day => setState({ ...state, day });
+
   // Updates the state with appointments for the day
   const appointments = getAppointmentsForDay(state, state.day);
 
+  // Updates the state with interviewers for the day
   const interviewersForDay = [...getInterviewersForDay(state, state.day)];
+
+  const bookInterview = (id, interview) =>  {
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview },
+    };
+
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment,
+    };
+
+    return axios
+      .put(`http://localhost:8001/api/appointments`, appointment)
+      .then((res) => {
+        setState({
+          ...state,
+          appointments,
+        });
+      })
+      .catch((pokemon) => console.log(pokemon));
+  }
   
   const schedule = appointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
@@ -36,13 +56,11 @@ export default function Application(props) {
         time={appointment.time}
         interview={interview}
         interviewers={interviewersForDay}
+        bookInterview={bookInterview}
       />
     )
   });
 
-
-  // Updates the state with the new day
-  const setDay = day => setState({ ...state, day });
 
 
   // Fetch data from API

@@ -1,5 +1,5 @@
 export function getAppointmentsForDay(state, day) {
-  const [filteredDay] = state.days.filter(days => days.name === day);
+  const [filteredDay] = state.days.filter(unFilteredDay => unFilteredDay.name === day);
   if (!filteredDay || !state.days.length === 0 ) return [];
   // console.log([filteredDay])
   // [ { id: 1, name: 'Monday', appointments: [ 1, 2, 3 ] } ]
@@ -34,8 +34,6 @@ export function getInterviewersForDay(state, day) {
 
   const interviewerIds = filteredDay.interviewers;
   const interviewersInfo = interviewerIds.map(intId => state.interviewers[intId]);
-
-
 
   console.log('This is from selectors.js. interviewers info returns', interviewersInfo)
   return interviewersInfo;

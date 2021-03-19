@@ -9,10 +9,10 @@ export default function useVisualMode (initial) {
   const transition = (newMode, replace = false) => {
 		if (replace) {  // Replaces the current mode in the history with a new one
 			setHistory(prev => [...prev.slice(0, -1), newMode]);
-			setMode(newMode);
+			setMode(newMode);	// sets new array = updated array
 		} else {
 			setHistory(prev => [...prev, newMode]);
-			setMode(newMode);
+			setMode(newMode); // sets new array = updated array
 		}
 	};
 
