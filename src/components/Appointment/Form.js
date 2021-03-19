@@ -21,9 +21,6 @@ export default function Form(props) {
     onCancel();
   };
 
-  console.log('name', name);
-  console.log('interviewer', interviewer);
-
   return(
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">
@@ -58,11 +55,3 @@ export default function Form(props) {
     </main>
   )
 }
-
-/*
-
-- Selected function not working when selecting interviewer 
-- onSave function not displaying?
-
-
-*/
