@@ -12,6 +12,7 @@ const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
 const SAVING = "SAVING";
+const DELETING = "DELETING";
 
 export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
@@ -37,6 +38,15 @@ export default function Appointment(props) {
       .catch((err) => console.log(err));
   }
 
+  const deleteAppt = function() {
+    transition(DELETING, true)
+
+    props.cancelInterview(props.id)
+      .then(() => transition(DELETING))
+      .catch((err) => console.log(err));
+
+  }
+
   return (
     <article className="appointment">
     <Header time={props.time} /> 
@@ -52,14 +62,22 @@ export default function Appointment(props) {
       <Show
         student={props.interview.student}
         interviewer={props.interview.interviewer.name}
+        onDelete={() => deleteAppt(true)}
       />
     )}
     {mode === SAVING && <Status message="Saving appointment..." />}
+    {mode === DELETING && <Status message="Deleting appointment..." />}
     </article>
   )
 };
 
 /*
+How to make the POST/PUT request?
 Not transitioning to show after saving. How to check data is save? 
 Warnings after saving
+
+Delete - same problem - not posting???
+
+Interviewer name not showing on appointment
+
 */

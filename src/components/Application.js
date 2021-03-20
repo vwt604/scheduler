@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import DayList from 'components/DayList.js';
 import "components/Application.scss";
-import Appointment from "components/Appointment/index";
+import Appointment from "components/Appointment/index.js";
 import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "../helpers/selectors";
 
 
@@ -18,13 +18,16 @@ export default function Application(props) {
 
   // Changing local state
   const bookInterview = (id, interview) =>  {
-    console.log('this is from application.js book interview', id, interview)
+    // console.log('this is from application.js book interview', id, interview)
     
     // appointment object with values copied from existing appointment
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
     };
+
+    // console.log('TEST', appointment)
+    // {id: 4, time: "3pm", interview: {…}}
     
     // update pattern to replace the existing record with the matching id
     const appointments = {
@@ -42,6 +45,10 @@ export default function Application(props) {
         })
       })
       .catch((err) => console.log(err));
+  }
+
+  const cancelInterview = (id, interview) => {
+    console.log(id, interview)
   }
 
   // Updates the state with interviewers for the day
@@ -64,10 +71,10 @@ export default function Application(props) {
         interview={interview}
         interviewers={interviewersForDay}
         bookInterview={bookInterview}
+        cancelInterview={cancelInterview}
       />
     )
   });
-
 
 
   // Fetch data from API
