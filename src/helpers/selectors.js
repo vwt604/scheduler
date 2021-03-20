@@ -29,7 +29,7 @@ export function getInterview(state, interview) {
 
 
 export function getInterviewersForDay(state, day) {
-  const filteredDay = state.days.find(unFilteredDay => unFilteredDay.name === day); //find replaces filter
+  const filteredDay = state.days.find(unFilteredDay => unFilteredDay.name === day); //find returns the first value. vs filter returns array
   if (!filteredDay || !state.days.length === 0 ) return [];
 
   const interviewerIds = filteredDay.interviewers;

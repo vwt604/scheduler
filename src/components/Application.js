@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
-import "components/Application.scss";
 import DayList from 'components/DayList.js';
+import "components/Application.scss";
 import Appointment from "components/Appointment/index";
 import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "../helpers/selectors";
+
 
 export default function Application(props) {
 
@@ -12,39 +13,45 @@ export default function Application(props) {
     day: "Monday",
     days: [],
     appointments: {}, 
-    interviewers: {},
+    interviewers: {}
   });
+
+  // Changing local state
+  const bookInterview = (id, interview) =>  {
+    console.log('this is from application.js book interview', id, interview)
+    
+    // appointment object with values copied from existing appointment
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+    
+    // update pattern to replace the existing record with the matching id
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+
+    // Saves updated booking information
+    return axios
+      .put(`http://localhost:8001/api/appointments/${id}`, appointment)
+      .then(() => {
+        setState({
+          ...state,
+          appointments
+        })
+      })
+      .catch((err) => console.log(err));
+  }
+
+  // Updates the state with interviewers for the day
+  const interviewersForDay = [...getInterviewersForDay(state, state.day)];
 
   // Updates the state with the new day
   const setDay = day => setState({ ...state, day });
 
   // Updates the state with appointments for the day
   const appointments = getAppointmentsForDay(state, state.day);
-
-  // Updates the state with interviewers for the day
-  const interviewersForDay = [...getInterviewersForDay(state, state.day)];
-
-  const bookInterview = (id, interview) =>  {
-    const appointment = {
-      ...state.appointments[id],
-      interview: { ...interview },
-    };
-
-    const appointments = {
-      ...state.appointments,
-      [id]: appointment,
-    };
-
-    return axios
-      .put(`http://localhost:8001/api/appointments`, appointment)
-      .then((res) => {
-        setState({
-          ...state,
-          appointments,
-        });
-      })
-      .catch((pokemon) => console.log(pokemon));
-  }
   
   const schedule = appointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
