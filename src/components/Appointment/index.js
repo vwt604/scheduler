@@ -14,6 +14,7 @@ const CREATE = "CREATE";
 const SAVING = "SAVING";
 const DELETING = "DELETING";
 const CONFIRM = "CONFIRM";
+const EDIT = "EDIT";
 
 export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
@@ -54,6 +55,18 @@ export default function Appointment(props) {
     }
   }
 
+  const editAppt = function(name, interviewer) {
+    const interview = {
+      student: name, 
+      interviewer //id
+    };
+
+    transition(EDIT);
+
+    props.bookInterview(props.id, interview)
+      .then(() => transition(SHOW)) //transitions to show after calling props.bookInterview
+      .catch((err) => console.log(err));
+  }
 
   return (
     <article className="appointment">
@@ -71,10 +84,20 @@ export default function Appointment(props) {
         student={props.interview.student}
         interviewer={props.interview.interviewer}
         onDelete={() => deleteAppt(false)}
+        onEdit={editAppt}
       />
     )}
     {mode === SAVING && <Status message="Saving appointment..." />}
     {mode === DELETING && <Status message="Deleting appointment..." />}
+    {mode === EDIT && 
+      <Form
+        student={props.interview.student}
+        interviewer={props.interview.interviewer}
+        interviewers={props.interviewers}
+        onCancel={back}
+        onSave={save}
+      />
+    }
     {mode === CONFIRM &&  
       <Confirm
         message="Delete this appointment?"

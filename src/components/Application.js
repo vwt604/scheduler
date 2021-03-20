@@ -93,6 +93,7 @@ export default function Application(props) {
         interviewers={interviewersForDay}
         bookInterview={bookInterview}
         cancelInterview={cancelInterview}
+        editInterview={bookInterview}
       />
     )
   });
