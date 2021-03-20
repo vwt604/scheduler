@@ -22,13 +22,13 @@ export default function Appointment(props) {
   // console.log('this is props from index.js', props)
   
   //
-  const save = function(name, interviewer) {
+  const save = function(name, interviewer) { //where do these values come from? Form?
     console.log('this is interview from index.js')
     console.log(name);
     console.log(interviewer);
     const interview = {
       student: name, 
-      interviewer
+      interviewer //id
     };
 
     transition(SAVING);
@@ -54,15 +54,15 @@ export default function Appointment(props) {
     {mode === CREATE && 
       <Form
         interviewers={props.interviewers}
-        onCancel={() => back()}
+        onCancel={back}
         onSave={save}
       />
     }
     {mode === SHOW && (
       <Show
         student={props.interview.student}
-        interviewer={props.interview.interviewer.name}
-        onDelete={() => deleteAppt(true)}
+        interviewer={props.interview.interviewer}
+        onDelete={deleteAppt}
       />
     )}
     {mode === SAVING && <Status message="Saving appointment..." />}
@@ -78,6 +78,6 @@ Warnings after saving
 
 Delete - same problem - not posting???
 
-Interviewer name not showing on appointment
+Bug: Interviewer name not showing on appointment
 
 */

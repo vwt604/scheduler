@@ -37,7 +37,7 @@ export default function Application(props) {
 
     // Saves updated booking information
     return axios
-      .put(`http://localhost:8001/api/appointments/${id}`, appointment)
+      .put(`http://localhost:8001/api/appointments/${id}`, {interview})
       .then(() => {
         setState({
           ...state,
