@@ -1,11 +1,11 @@
 import React, { Fragment} from 'react';
-import classNames from 'classnames/bind';
 import 'components/Appointment/styles.scss'
 import Header from 'components/Appointment/Header.js';
 import Show from 'components/Appointment/Show.js';
 import Empty from 'components/Appointment/Empty.js';
 import Form from 'components/Appointment/Form.js';
 import Status from 'components/Appointment/Status.js';
+import Confirm from 'components/Appointment/Confirm.js';
 import useVisualMode from 'hooks/useVisualMode.js';
 
 const EMPTY = "EMPTY";
@@ -13,6 +13,7 @@ const SHOW = "SHOW";
 const CREATE = "CREATE";
 const SAVING = "SAVING";
 const DELETING = "DELETING";
+const CONFIRM = "CONFIRM";
 
 export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
@@ -38,14 +39,23 @@ export default function Appointment(props) {
       .catch((err) => console.log(err));
   }
 
-  const deleteAppt = function() {
-    transition(DELETING, true)
+  const deleteAppt = function(boolean) {
 
-    props.cancelInterview(props.id)
-      .then(() => transition(DELETING))
-      .catch((err) => console.log(err));
+    if(!boolean) {
+      transition(CONFIRM)
+    }
 
+    if(boolean) {
+      transition(DELETING, true)
+  
+      props.cancelInterview(props.id)
+        .then(() => transition(EMPTY))
+        .catch((err) => console.log(err));
+    }
   }
+
+
+  
 
   return (
     <article className="appointment">
@@ -67,6 +77,13 @@ export default function Appointment(props) {
     )}
     {mode === SAVING && <Status message="Saving appointment..." />}
     {mode === DELETING && <Status message="Deleting appointment..." />}
+    {mode === CONFIRM &&  
+      <Confirm
+        message="Delete this appointment?"
+        onConfirm={props.onConfirm}
+        onCancel={props.onCancel}
+      />
+    }
     </article>
   )
 };
