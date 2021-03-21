@@ -55,18 +55,7 @@ export default function Appointment(props) {
     }
   }
 
-  const editAppt = function(name, interviewer) {
-    const interview = {
-      student: name, 
-      interviewer //id
-    };
 
-    transition(EDIT);
-
-    props.bookInterview(props.id, interview)
-      .then(() => transition(SHOW)) //transitions to show after calling props.bookInterview
-      .catch((err) => console.log(err));
-  }
 
   return (
     <article className="appointment">
@@ -84,15 +73,15 @@ export default function Appointment(props) {
         student={props.interview.student}
         interviewer={props.interview.interviewer}
         onDelete={() => deleteAppt(false)}
-        onEdit={editAppt}
+        onEdit={() => transition(EDIT)}
       />
     )}
     {mode === SAVING && <Status message="Saving appointment..." />}
     {mode === DELETING && <Status message="Deleting appointment..." />}
     {mode === EDIT && 
       <Form
-        student={props.interview.student}
-        interviewer={props.interview.interviewer}
+        name={props.interview.student} // !! Using "name" and not "student"
+        interviewer={props.interview.interviewer.id}
         interviewers={props.interviewers}
         onCancel={back}
         onSave={save}
@@ -109,13 +98,3 @@ export default function Appointment(props) {
   )
 };
 
-/*
-How to make the POST/PUT request?
-Not transitioning to show after saving. How to check data is save? 
-Warnings after saving
-
-Delete - same problem - not posting???
-
-Bug: Interviewer name not showing on appointment
-
-*/
