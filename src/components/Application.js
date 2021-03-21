@@ -68,7 +68,6 @@ export default function Application(props) {
           })
         
       })
-      .catch((err) => console.log(err))
   }
 
   // Updates the state with interviewers for the day

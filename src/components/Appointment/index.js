@@ -17,6 +17,7 @@ const DELETING = "DELETING";
 const CONFIRM = "CONFIRM";
 const EDIT = "EDIT";
 const ERROR_SAVE = "ERROR_SAVE";
+const ERROR_DELETE = "ERROR_DELETE";
 
 export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
@@ -53,7 +54,7 @@ export default function Appointment(props) {
   
       props.cancelInterview(props.id)
         .then(() => transition(EMPTY))
-        .catch((err) => console.log(err));
+        .catch((err) => transition(ERROR_DELETE, true));
     }
   }
 
@@ -85,6 +86,11 @@ export default function Appointment(props) {
       />
     )}
     {mode === DELETING && <Status message="Deleting appointment..." />}
+    {mode === ERROR_DELETE && 
+      <Error 
+        message="Error in deleting appointment. Please try again." 
+        onClose={back}
+      />}
     {mode === EDIT && 
       <Form
         name={props.interview.student} // !! Using "name" and not "student"
