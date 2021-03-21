@@ -50,11 +50,11 @@ export default function Appointment(props) {
     }
 
     if(boolean) {
-      transition(DELETING, true)
+      transition(DELETING, true) // double back 
   
       props.cancelInterview(props.id)
         .then(() => transition(EMPTY))
-        .catch((err) => transition(ERROR_DELETE, true));
+        .catch((err) => transition(ERROR_DELETE, true)); // double back 
     }
   }
 
