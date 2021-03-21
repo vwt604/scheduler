@@ -6,6 +6,7 @@ import Empty from 'components/Appointment/Empty.js';
 import Form from 'components/Appointment/Form.js';
 import Status from 'components/Appointment/Status.js';
 import Confirm from 'components/Appointment/Confirm.js';
+import Error from 'components/Appointment/Error.js';
 import useVisualMode from 'hooks/useVisualMode.js';
 
 const EMPTY = "EMPTY";
@@ -15,6 +16,7 @@ const SAVING = "SAVING";
 const DELETING = "DELETING";
 const CONFIRM = "CONFIRM";
 const EDIT = "EDIT";
+const ERROR_SAVE = "ERROR_SAVE";
 
 export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
@@ -37,7 +39,7 @@ export default function Appointment(props) {
 
     props.bookInterview(props.id, interview)
       .then(() => transition(SHOW)) //transitions to show after calling props.bookInterview
-      .catch((err) => console.log(err));
+      .catch((err) => transition(ERROR_SAVE, true));
   }
 
   const deleteAppt = function(boolean) {
@@ -68,6 +70,12 @@ export default function Appointment(props) {
         onSave={save}
       />
     }
+    {mode === SAVING && <Status message="Saving appointment..." />}
+    {mode === ERROR_SAVE && 
+      <Error 
+        message="Error in saving appointment. Please try again." 
+        onClose={back}
+      />}
     {mode === SHOW && (
       <Show
         student={props.interview.student}
@@ -76,7 +84,6 @@ export default function Appointment(props) {
         onEdit={() => transition(EDIT)}
       />
     )}
-    {mode === SAVING && <Status message="Saving appointment..." />}
     {mode === DELETING && <Status message="Deleting appointment..." />}
     {mode === EDIT && 
       <Form
