@@ -7,12 +7,12 @@ import Button from "components/Button";
 afterEach(cleanup);
 
 it("renders without crashing", () => {
-  render(<Button />);
+  render(<Button />);   //render function is provided by the react-testing-library 
 });
 
 it("renders its `children` prop as text", () => {
-  const { getByText } = render(<Button>Default</Button>);
-  expect(getByText("Default")).toBeInTheDocument();
+  const { getByText } = render(<Button>Default</Button>); // render function is imported from the react-testing-library. // getByText is a query funcion returned by render func - part of dom-testing-library
+  expect(getByText("Default")).toBeInTheDocument(); // expect is injected into global scope by Jest. // toBeInTheDocument is matcher provided by jest-dom library
 });
 
 it("renders a default button style", () => {
@@ -43,7 +43,7 @@ it("renders a clickable button", () => {
   expect(handleClick).toHaveBeenCalledTimes(1);
 });
 
-it.skip("renders a disabled button", () => {
+it("renders a disabled button", () => {
   const handleClick = jest.fn();
   const { getByText } = render(
     <Button disabled onClick={handleClick}>

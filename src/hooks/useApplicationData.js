@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function useApplicationData () {
-  // Combined useState calls 
+  // Combined useState calls. Where values/data is stored
   const [state, setState] = useState({
     day: "Monday",
     days: [],
@@ -12,7 +12,7 @@ export default function useApplicationData () {
   
   // Changing local state
   const bookInterview = (id, interview) =>  {
-    console.log('Deleting...')
+    console.log('Booking...')
     
     // appointment object with values copied from existing appointment
     const appointment = {
@@ -60,6 +60,30 @@ export default function useApplicationData () {
           })
       })
   }
+
+  const setSpotsForDay = (targetDay, newSpots) => { //sets the target day's spots in memory
+    setState((prev) => ({
+      ...prev,
+      days: prev.days.map((day) =>
+        day.name === targetDay ? { ...day, spots: newSpots } : day //for each day of the week, if targetDay is selected,  update spot with newSpots
+      ),
+    }));
+  }
+
+  useEffect(() => {
+    const spotsRemaining = () => {
+      state.days.forEach((day) => { //for each day set in memory, 
+        const newSpotsRemaining = day.appointments 
+          .map((apptId) => state.appointments[apptId].interview) //looks into appointments stored in memory. forEach appt, 
+          .filter((item) => item === null).length;  //filter num of appointments where interview = null (avalable spot)
+        if (newSpotsRemaining !== day.spots) { //update spots if there's been a change to spots (newSpotsRemaining)
+          setSpotsForDay(day.name, newSpotsRemaining); //update that day's spots with newSpotsRemaining
+        }
+      });
+    }
+    spotsRemaining();
+  });
+
   
   // Fetch data from API
   useEffect(() => {
