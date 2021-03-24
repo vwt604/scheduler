@@ -6,8 +6,8 @@ import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "../h
 import useApplicationData from "../hooks/useApplicationData.js";
 
 export default function Application(props) {
-  console.log('*****Application props*****')
-  console.log(props)
+  // console.log('*****Application props*****')
+  // console.log(props)
   const {
     state,
     setDay,

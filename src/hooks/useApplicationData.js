@@ -28,7 +28,7 @@ export default function useApplicationData () {
   
     // Saves updated booking information
     return axios
-      .put(`http://localhost:8001/api/appointments/${id}`, {interview})
+      .put(`/api/appointments/${id}`, appointment)
       .then(() => {
         console.log('Successfully booked appointment')
         setState({
@@ -51,7 +51,7 @@ export default function useApplicationData () {
     };
   
     return axios
-      .delete(`http://localhost:8001/api/appointments/${id}`, {interview})
+      .delete(`/api/appointments/${id}`, {interview})
       .then(() => {
         console.log('Successfully deleted')
           setState({
@@ -88,9 +88,9 @@ export default function useApplicationData () {
   // Fetch data from API
   useEffect(() => {
     Promise.all([
-      axios.get("http://localhost:8001/api/days"),
-      axios.get("http://localhost:8001/api/appointments"),
-      axios.get("http://localhost:8001/api/interviewers")
+      axios.get("/api/days"),
+      axios.get("/api/appointments"),
+      axios.get("/api/interviewers")
     ])
     .then((all) => {
       setState((prev) => ({

@@ -7,7 +7,7 @@ export function getAppointmentsForDay(state, day) {
   const appointmentIds = filteredDay.appointments
   const appointmentInfo = appointmentIds.map(element => state.appointments[element])
 
-  console.log('This is from selectors.js. Appt infor returns', appointmentInfo)
+  // console.log('This is from selectors.js. Appt infor returns', appointmentInfo)
   return appointmentInfo;
 };
 
@@ -35,7 +35,7 @@ export function getInterviewersForDay(state, day) {
   const interviewerIds = filteredDay.interviewers;
   const interviewersInfo = interviewerIds.map(intId => state.interviewers[intId]);
 
-  console.log('This is from selectors.js. interviewers info returns', interviewersInfo)
+  // console.log('This is from selectors.js. interviewers info returns', interviewersInfo)
   return interviewersInfo;
 };
 
