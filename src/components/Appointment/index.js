@@ -90,7 +90,7 @@ export default function Appointment(props) {
     {mode === DELETING && <Status message="Deleting appointment..." />}
     {mode === ERROR_DELETE && 
       <Error 
-        message="Error in deleting appointment. Please try again." 
+        message="78jusmw  Error in deleting appointment. Please try again." 
         onClose={back}
       />}
     {mode === EDIT && 
