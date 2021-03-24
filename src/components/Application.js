@@ -1,8 +1,12 @@
 import React from "react";
-import DayList from 'components/DayList.js';
+import DayList from "components/DayList.js";
 import "components/Application.scss";
 import Appointment from "components/Appointment/index.js";
-import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "../helpers/selectors";
+import {
+  getAppointmentsForDay,
+  getInterview,
+  getInterviewersForDay,
+} from "../helpers/selectors";
 import useApplicationData from "../hooks/useApplicationData.js";
 
 export default function Application(props) {
@@ -12,7 +16,7 @@ export default function Application(props) {
     state,
     setDay,
     bookInterview,
-    cancelInterview
+    cancelInterview,
   } = useApplicationData();
 
   // Updates the state with interviewers for the day
@@ -20,10 +24,10 @@ export default function Application(props) {
 
   // Updates the state with appointments for the day
   const appointments = getAppointmentsForDay(state, state.day).map(
-    appointment => {
+    (appointment) => {
       return (
-        <Appointment 
-          key={appointment.id} 
+        <Appointment
+          key={appointment.id}
           {...appointment}
           time={appointment.time}
           interview={getInterview(state, appointment.interview)}
@@ -32,12 +36,12 @@ export default function Application(props) {
           cancelInterview={cancelInterview}
           editInterview={bookInterview}
         />
-      )
+      );
     }
   );
-  
-    return (
-      <main className="layout">
+
+  return (
+    <main className="layout">
       <section className="sidebar">
         <img
           className="sidebar--centered"
@@ -46,11 +50,7 @@ export default function Application(props) {
         />
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
-          <DayList 
-            days={state.days} 
-            day={state.day} 
-            setDay={setDay} 
-          />
+          <DayList days={state.days} day={state.day} setDay={setDay} />
         </nav>
         <img
           className="sidebar__lhl sidebar--centered"

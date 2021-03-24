@@ -1,12 +1,11 @@
-import React from 'react';
-import classNames from 'classnames/bind';
-import 'components/Appointment/styles.scss'
+import React from "react";
+import classNames from "classnames/bind";
+import "components/Appointment/styles.scss";
 
 export default function Status(props) {
+  const { message } = props;
 
-  const { message } = props
-
-  return(
+  return (
     <main className="appointment__card appointment__card--status">
       <img
         className="appointment__status-image"
@@ -15,5 +14,5 @@ export default function Status(props) {
       />
       <h1 className="text--semi-bold">{message}</h1>
     </main>
-  )
+  );
 }

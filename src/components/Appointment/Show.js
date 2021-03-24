@@ -1,12 +1,11 @@
-import React from 'react';
-import classNames from 'classnames/bind';
-import 'components/Appointment/styles.scss'
+import React from "react";
+import classNames from "classnames/bind";
+import "components/Appointment/styles.scss";
 
 export default function Show(props) {
+  const { student, interviewer, onEdit, onDelete } = props;
 
-  const { student, interviewer, onEdit, onDelete } = props
-
-  return(
+  return (
     <main className="appointment__card appointment__card--show">
       <section className="appointment__card-left">
         <h2 className="text--regular">{student}</h2>
@@ -21,16 +20,16 @@ export default function Show(props) {
             className="appointment__actions-button"
             src="images/edit.png"
             alt="Edit"
-            onClick={event => onEdit()}
+            onClick={(event) => onEdit()}
           />
           <img
             className="appointment__actions-button"
             src="images/trash.png"
             alt="Delete"
-            onClick={event => onDelete()}
+            onClick={(event) => onDelete()}
           />
         </section>
       </section>
     </main>
-  )
+  );
 }

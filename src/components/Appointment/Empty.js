@@ -1,12 +1,11 @@
-import React from 'react';
-import classNames from 'classnames/bind';
-import 'components/Appointment/styles.scss'
+import React from "react";
+import classNames from "classnames/bind";
+import "components/Appointment/styles.scss";
 
 export default function Empty(props) {
+  const { onAdd } = props;
 
-  const { onAdd } = props
-
-  return(
+  return (
     <main className="appointment__add">
       <img
         className="appointment__add-button"
@@ -15,5 +14,5 @@ export default function Empty(props) {
         onClick={onAdd}
       />
     </main>
-  )
+  );
 }
