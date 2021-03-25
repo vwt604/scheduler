@@ -4,6 +4,8 @@ Interview Scheduler is a single-page React app. With this application, a student
 
 ## Final Product
 
+!["create new appointment"](https://github.com/vwt604/scheduler/blob/master/public/images/scheduler-demo.gif)
+
 
 ## Dependencies
 
