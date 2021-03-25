@@ -1,8 +1,24 @@
 # Interview Scheduler
 
-## Setup
+Interview Scheduler is a single-page React app. With this application, a student can create, edit and delete interview appointments.
 
-Install dependencies with `npm install`.
+## Final Product
+
+
+## Dependencies
+
+- axios
+- classnames
+- normalize.css
+- react
+- react-dom
+- react-scripts
+
+## Getting Started
+
+- Install all dependencies (using the `npm install` command).
+- Get and install the [server](https://github.com/lighthouse-labs/scheduler-api).
+- Run both the server and the client.
 
 ## Running Webpack Development Server
 
