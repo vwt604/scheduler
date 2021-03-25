@@ -10,8 +10,6 @@ import {
 import useApplicationData from "../hooks/useApplicationData.js";
 
 export default function Application(props) {
-  // console.log('*****Application props*****')
-  // console.log(props)
   const {
     state,
     setDay,
@@ -19,10 +17,8 @@ export default function Application(props) {
     cancelInterview,
   } = useApplicationData();
 
-  // Updates the state with interviewers for the day
   const interviewers = getInterviewersForDay(state, state.day);
 
-  // Updates the state with appointments for the day
   const appointments = getAppointmentsForDay(state, state.day).map(
     (appointment) => {
       return (

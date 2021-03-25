@@ -1,5 +1,3 @@
-// mocking to replace the functionality of entire modules
-// allows for flexibility in how we isolate parts of our code for testing
 const fixtures = {
   days: [
     {

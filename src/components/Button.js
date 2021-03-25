@@ -2,22 +2,21 @@ import React from "react";
 import classNames from "classnames/bind";
 import "components/Button.scss";
 
-// Renders button elements
 export default function Button(props) {
-  //Conditional css
+  const { onClick, disabled, children, confirm, danger } = props
+  
   const buttonClass = classNames("button", {
-    "button--confirm": props.confirm,
-    "button--danger": props.danger,
+    "button--confirm": confirm,
+    "button--danger": danger,
   });
 
-  // Adding Interactivity
   return (
     <button
       className={buttonClass}
-      onClick={props.onClick}
-      disabled={props.disabled}
+      onClick={onClick}
+      disabled={disabled}
     >
-      {props.children}
+      {children}
     </button>
   );
 }

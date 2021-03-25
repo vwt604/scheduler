@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import "components/Appointment/styles.scss";
 import Header from "components/Appointment/Header.js";
 import Show from "components/Appointment/Show.js";
@@ -24,24 +24,17 @@ export default function Appointment(props) {
     props.interview ? SHOW : EMPTY
   );
 
-  // console.log('this is props from index.js', props)
-
-  //
   const save = function (name, interviewer) {
-    //where do these values come from? Form?
-    console.log("this is interview from index.js");
-    console.log(name);
-    console.log(interviewer);
     const interview = {
       student: name,
-      interviewer, //id
+      interviewer,
     };
 
     transition(SAVING);
 
     props
       .bookInterview(props.id, interview)
-      .then(() => transition(SHOW)) //transitions to show after calling props.bookInterview
+      .then(() => transition(SHOW)) 
       .catch((err) => transition(ERROR_SAVE, true));
   };
 
@@ -51,12 +44,12 @@ export default function Appointment(props) {
     }
 
     if (boolean) {
-      transition(DELETING, true); // double back
+      transition(DELETING, true); 
 
       props
         .cancelInterview(props.id)
         .then(() => transition(EMPTY))
-        .catch((err) => transition(ERROR_DELETE, true)); // double back
+        .catch((err) => transition(ERROR_DELETE, true));
     }
   };
 

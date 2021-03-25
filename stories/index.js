@@ -19,11 +19,6 @@ import Error from "components/Appointment/Error";
 import Form from "components/Appointment/Form";
 import Appointment from "components/Appointment/index";
 
-
-//Test data for interviewer
-
-const student = { id: 1, name: "Amy Mansell"}
-
 const interviewer = { id: 1, name: "Sylvia Palmer", avatar: "https://i.imgur.com/LpaY82x.png" }
 
 const interviewers = [
@@ -52,7 +47,6 @@ const days = [
   },
 ];
 
-
 storiesOf("Button", module)
   .addParameters({
     backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
@@ -69,16 +63,18 @@ storiesOf("Button", module)
     </Button>
   ));
 
-storiesOf("DayListItem", module) //Initiates Storybook and registers our DayListItem component
+  
+storiesOf("DayListItem", module)
   .addParameters({
     backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
-  }) // Provides the default background color for our component
-  .add("Unselected", () => <DayListItem name="Monday" spots={5} />) // To define our stories, we call add() once for each of our test states to generate a story
+  }) 
+  .add("Unselected", () => <DayListItem name="Monday" spots={5} />) 
   .add("Selected", () => <DayListItem name="Monday" spots={5} selected />) 
   .add("Full", () => <DayListItem name="Monday" spots={0} />)
   .add("Clickable", () => (
-    <DayListItem name="Tuesday" setDay={action("setDay")} spots={5} /> // action() allows us to create a callback that appears in the actions panel when clicked
+    <DayListItem name="Tuesday" setDay={action("setDay")} spots={5} /> 
   ));
+
 
 storiesOf("DayList", module)
   .addParameters({
@@ -90,6 +86,7 @@ storiesOf("DayList", module)
   .add("Tuesday", () => (
     <DayList days={days} day={"Tuesday"} setDay={action("setDay")} />
   ));
+
 
 storiesOf("InterviewerListItem", module)
   .addParameters({
@@ -120,7 +117,7 @@ storiesOf("InterviewerListItem", module)
   ));
 
 
-  storiesOf("InterviewerList", module)
+storiesOf("InterviewerList", module)
   .addParameters({
     backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
   })
@@ -138,7 +135,8 @@ storiesOf("InterviewerListItem", module)
     />
   ));
 
-  storiesOf("Appointment", module)
+  
+storiesOf("Appointment", module)
   .addParameters({
     backgrounds: [{ name: "white", value: "#fff", default: true }]
   })

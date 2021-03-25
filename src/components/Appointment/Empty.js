@@ -1,5 +1,4 @@
 import React from "react";
-import classNames from "classnames/bind";
 import "components/Appointment/styles.scss";
 
 export default function Empty(props) {
