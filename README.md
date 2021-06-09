@@ -4,10 +4,8 @@ Interview Scheduler is a single-page React app. With this application, a student
 
 ## Final Product
 
-Navigate, create, edit and delete
 !["demo"](https://github.com/vwt604/scheduler/blob/master/public/images/scheduler-demo.gif)
 
-Error handling
 !["error"](https://github.com/vwt604/scheduler/blob/master/public/images/scheduler-error.gif)
 
 
