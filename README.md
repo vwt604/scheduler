@@ -2,6 +2,8 @@
 
 Interview Scheduler is a single-page React app. With this application, a student can create, edit and delete interview appointments.
 
+[View the live app](https://vwt604-scheduler.netlify.app/)
+
 ## Final Product
 
 !["demo"](https://github.com/vwt604/scheduler/blob/master/public/images/scheduler-demo.gif)
