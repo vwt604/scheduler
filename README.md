@@ -1,6 +1,6 @@
-# Interview Scheduler
+# Scheduler
 
-Interview Scheduler is a single-page React app. With this application, a student can create, edit and delete interview appointments.
+Scheduler is a single-page React app. With this application, a student can create, edit and delete interview appointments.
 
 [View the live app](https://vwt604-scheduler.netlify.app/)
 
